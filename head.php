@@ -48,10 +48,10 @@ setlocale(LC_MONETARY, 'en_US');
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">Become a customer</a>
+                        <a href="#">Add Customer</a>
                     </li>
                     <li>
-                        <a href="#">Become a partner</a>
+                        <a href="#">Add Partner</a>
                     </li>
                 </ul>
                 <div class="col-sm-3 col-md-3">
