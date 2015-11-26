@@ -12,10 +12,14 @@ class LsmCurl implements I_LsmCurl {
 	private $_responseStatus;
 	private $_responseBody;
 
+	private $_debug;
+
 	/**
 	 * Sets up the the instance vars and sets default options for the 
 	 */
-	public function __construct() {
+	public function __construct( $debug = false ) {
+		$this->_debug = $debug;
+
 		//set up default variables
 		$this->_headers = array();
 		$this->_ch = curl_init();
@@ -73,7 +77,7 @@ class LsmCurl implements I_LsmCurl {
 	} //useDelete
 
 	public function setEndpoint( $endpoint ) {
-		$this->_uri = $endpoint;
+		$this->_url = $endpoint;
 
 	} //setEndpoint
 
@@ -85,6 +89,12 @@ class LsmCurl implements I_LsmCurl {
         curl_exec( $this->_ch );
         $this->_responseStatus = curl_getinfo( $this->_ch, CURLINFO_HTTP_CODE );
         $this->_responseBody = ob_get_clean();
+
+        if( $this->_debug ) {
+        	echo "<p class='debug'><pre>DEBUG" . PHP_EOL;
+        	var_dump( $this );
+        	echo "</pre></p>";
+        }
 	} //sendRequest
 
 	public function getResponseStatus() {

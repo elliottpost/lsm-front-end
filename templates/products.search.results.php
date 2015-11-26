@@ -5,8 +5,8 @@ if( !isset( $_REQUEST['q'] ) || empty( $_REQUEST['q'] ) ) {
     return;
 }
 
-$lsm = new LsmCurl;
-$lsm->setEndpoint( LSM_API_ENDPOINT . "products" . DS . $_REQUEST['q'] );
+$lsm = new LsmCurl( true );
+$lsm->setEndpoint( LSM_API_ENDPOINT . "products/" . $_REQUEST['q'] );
 $lsm->useGet();
 $lsm->sendRequest();
 

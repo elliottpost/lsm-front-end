@@ -9,7 +9,8 @@ if( !defined( "SECURITY_TOKEN" ) || SECURITY_TOKEN !== '0b8"]79/~~.+7-6V:-XK1?q{
 
 //set up site paths -- all paths should have trailing slash
 define( "SITE_URI", "http://162.243.94.35/" ); 
-define( "SITE_ROOT", dirname( dirname( __FILE__ ) ) );
+// define( "SITE_ROOT",  dirname( dirname( __FILE__ ) ) );
+define( "SITE_ROOT", "." );
 define( "DS", DIRECTORY_SEPARATOR );
 define( "LIB_PATH", SITE_ROOT . DS . "lib" . DS );
 define( "CLASSES_PATH", LIB_PATH . "classes" . DS );
