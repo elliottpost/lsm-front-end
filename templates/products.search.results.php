@@ -8,14 +8,11 @@ if( !isset( $_REQUEST['q'] ) || empty( $_REQUEST['q'] ) ) {
 $lsm = new LsmCurl( true );
 $lsm->setEndpoint( LSM_API_ENDPOINT . "products/" . $_REQUEST['q'] );
 $lsm->useGet();
-die( "here a" );
 $lsm->sendRequest();
 
 Util::getHeader();
 
-die( "here b" );
 ?>
-
     <!-- Page Heading -->
     <div class="row">
         <div class="col-lg-12">
