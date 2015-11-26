@@ -1,3 +1,12 @@
-php_flag display_startup_errors on
-php_flag display_errors on
-php_flag html_errors on
+Options +FollowSymlinks
+RewriteEngine On
+
+
+
+#RewriteRule ^/([^/]+)/([^/]+)/([^/]+)/([^/]+)/? /index.php?p1=$1&p2=$2&p3=$3&q=$4 [QSA]
+#RewriteRule ^/([^/]+)/([^/]+)/([^/]+)/? /index.php?p1=$1&p2=$2&p3=$3 [QSA]
+#RewriteRule ^/([^/]+)/([^/]+)/? /index.php?p1=$1&p2=$2&p3=$3 [QSA]
+
+
+RewriteRule ^/?([a-zA-Z_]+)/([a-zA-Z_]+)/([a-zA-Z_]+)/([a-zA-Z_]+)/?$ index.php?p1=$1&p2=$2&p3=$3&q=$4 [L]
+RewriteRule ^/?([a-zA-Z_]+)/([a-zA-Z_]+)/([a-zA-Z_]+)/?$ index.php?p1=$1&p2=$2&p3=$3 [L]

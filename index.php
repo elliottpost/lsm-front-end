@@ -7,6 +7,7 @@
 
 //set up our system
 define( "SECURITY_TOKEN", '0b8"]79/~~.+7-6V:-XK1?q{4D^+1@"L' );
+define( "SITE_ROOT", dirname( $_SERVER['SCRIPT_FILENAME'] ) );
 require_once 'lib/config.php';
 
 //get the requested template
