@@ -1,16 +1,19 @@
 <?php
 //force a search query
 if( !isset( $_REQUEST['q'] ) || empty( $_REQUEST['q'] ) ) {
-    require_once 'index.php';
+    require_once TEMPLATES_PATH . 'index.php';
     return;
 }
 
 $lsm = new LsmCurl( true );
 $lsm->setEndpoint( LSM_API_ENDPOINT . "products/" . $_REQUEST['q'] );
 $lsm->useGet();
+die( "here a" );
 $lsm->sendRequest();
 
 Util::getHeader();
+
+die( "here b" );
 ?>
 
     <!-- Page Heading -->
