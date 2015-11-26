@@ -1,20 +1,31 @@
 <?php
-require_once 'head.php';
-?>
-<!-- Page Heading -->
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">Search for products</h1>
-        <form role="search" action='search-products.php' method='post'>    
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search Products" name="q">
-            <div class="input-group-btn">
-                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-            </div>
-        </div>
-        </form>
-    </div>
-</div>
-<!-- /.row -->
-<?php
-require_once 'foot.php';
+/**
+ * Lakeshore Market Front End
+ * Creates a front end shop for the Lakeshore Market service
+ * @author Elliott Post
+ */
+
+//set up our system
+define( "SECURITY_TOKEN", '0b8"]79/~~.+7-6V:-XK1?q{4D^+1@"L' );
+require_once 'lib/config.php';
+
+//get the requested template
+if( !isset( $_GET['p1'] ) ) {
+    require_once TEMPLATES_PATH . "index.php";
+    return;
+}
+
+$p1 = strtolower( $_GET['p1'] );
+if( !isset( $_GET['p2'] ) ) {
+    require_once TEMPLATES_PATH . $p1 . ".php";
+    return;
+}
+
+$p2 = strtolower( $_GET['p2'] );
+if( !isset( $_GET['p3'] ) ) {
+    require_once TEMPLATES_PATH . $p1 . "." . $p2 . ".php";
+    return;
+}
+
+$p3 = strtolower( $_GET['p3'] );
+require_once TEMPLATES_PATH . $p1 . "." . $p2 . "." . $p3 . ".php";
