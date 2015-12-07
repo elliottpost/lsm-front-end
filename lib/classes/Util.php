@@ -6,19 +6,21 @@
 
 abstract class Util implements I_Util {
 
-	/**
-	 * Includes the header template
-	 */
+	public static function getTemplate( $filename, $path = null ) {
+		if( !$path )
+			$path = TEMPLATES_PATH;
+		if( !file_exists( $path . $filename ) )
+			require TEMPLATES_PATH . "404.php";
+		else
+			require $path . $filename;
+	} //getTemplate
+
 	public static function getHeader() {
-		require_once TEMPLATES_PATH . "header.php";
+		static::getTemplate( "header.php" );
 	} //getHeader
 
-	/**
-	 * Includes the footer template
-	 */
 	public static function getFooter() {
-		require_once TEMPLATES_PATH . "footer.php";
+		static::getTemplate( "footer.php" );
 	} //getFooter
-
 
 } //Util

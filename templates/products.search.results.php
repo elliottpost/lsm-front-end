@@ -1,7 +1,7 @@
 <?php
 //force a search query
 if( !isset( $_REQUEST['q'] ) || empty( $_REQUEST['q'] ) ) {
-    require_once TEMPLATES_PATH . 'index.php';
+    Util::getTemplate( 'index.php' );
     return;
 }
 

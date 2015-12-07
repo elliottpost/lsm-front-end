@@ -42,28 +42,31 @@ setlocale(LC_MONETARY, 'en_US');
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Lakeshore Market</a>
+                <a class="navbar-brand" href="<?=SITE_URI?>">Lakeshore Market</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">Add Customer</a>
-                    </li>
-                    <li>
-                        <a href="#">Add Partner</a>
+                        <a href="<?=SITE_URI?>logout">Logout</a>
                     </li>
                 </ul>
-                <div class="col-sm-3 col-md-3">
-                    <form class="navbar-form" role="search" action='<?=SITE_URI?>products/search/results' method='post'>    
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search Products" name="q" value="<?=@$_REQUEST['q']?>">
-                        <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                        </div>
+                <?php
+                if( empty( Auth::getEmail() ) || empty( Auth::getPasswordHash() ) ) {
+                    ?>
+                    <div class="col-sm-3 col-md-3">
+                        <form class="navbar-form" role="search" action='<?=SITE_URI?>products/search/results' method='post'>    
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search Products" name="q" value="<?=@$_REQUEST['q']?>">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    </form>
-                </div>
+                    <?php
+                }
+                ?>
             </div>
             <!-- /.navbar-collapse -->
         </div>

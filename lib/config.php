@@ -25,10 +25,12 @@ define( "LSM_AA_PASS_HEADER_NAME", "password" );
 
 //do our includes
 #interfaces
-require_once 'lib/interfaces/I_LsmCurl.php';
-require_once 'lib/interfaces/I_Util.php';
+require_once SITE_ROOT . DS . 'lib/interfaces/I_LsmCurl.php';
+require_once SITE_ROOT . DS . 'lib/interfaces/I_Util.php';
+require_once SITE_ROOT . DS . 'lib/interfaces/I_Auth.php';
 
 #classes
-require_once 'lib/classes/LsmCurl.php';
-require_once 'lib/classes/Util.php';
+require_once SITE_ROOT . DS . 'lib/classes/LsmCurl.php';
+require_once SITE_ROOT . DS . 'lib/classes/Util.php';
+require_once SITE_ROOT . DS . 'lib/classes/Auth.php';
 
