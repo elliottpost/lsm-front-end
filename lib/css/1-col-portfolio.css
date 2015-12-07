@@ -11,3 +11,8 @@ body {
 footer {
     margin: 50px 0;
 }
+
+.debug {
+	max-height: 300px;
+	overflow: auto;
+}

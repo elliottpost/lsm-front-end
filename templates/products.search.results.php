@@ -28,7 +28,7 @@ Util::getHeader();
     <!-- /.row -->
     
     <?php
-    $products = json_decode( $lsm->getResponseContent() );
+    $products = $lsm->getResponseContent();
 
     if( (int) $lsm->getResponseStatus() != 200 ) {
         Util::getTemplate( '500.php' );
@@ -48,7 +48,7 @@ Util::getHeader();
     
     foreach( $products as $product ) {
         if( DEBUG_API_CALLS )
-            echo "<pre>"; var_dump( $product ); echo"</pre>";
+            echo "<pre class='debug'>"; var_dump( $product ); echo"</pre>";
         ?>
         <div class="row">
             <div class="col-md-7">

@@ -8,21 +8,25 @@ interface I_LsmCurl {
 
 	/**
 	 * Adds a header to this curl request
-	 * @param String $header 	the header string, eg: Accept: application/json
-	 * @throws Exception $e 	if header is not a string
+	 * @param String $key 		the header key, eg: "Content-Type"
+	 * @param String $value 	the header value, eg: "application/XML";
+	 * @throws Exception $e 	if either header key or value are not strings
 	 */
-	public function addHeader( $header );
-
-	/**
-	 * Removes all headers, including defaults
-	 */
-	public function clearHeaders();
+	public function addHeader( $key, $value );
 
 	/**
 	 * Adds a parameter to this curl request
-	 * @todo
+	 * @param String $key 		the key
+	 * @param String $value 	the key's value
 	 */
-	public function addParameter();
+	public function addParameter( $key, $value );
+
+	/**
+	 * Overwrites existing parameters and sets the passed array (or object) as
+	 * the new parameters
+	 * @param array/object $parameters 	an associative array or object
+	 */
+	public function setParameters( $parameters );
 
 	/**
 	 * Adds basic auth to the request
@@ -77,9 +81,21 @@ interface I_LsmCurl {
 	public function getResponseStatus();
 
 	/**
+	 * Returns the headers from the response
+	 * @return String $headers 		the response headers
+	 */
+	public function getResponseHeaders() ;
+
+	/**
 	 * Returns the message (body) from the response
-	 * @return String $message 		the response body
+	 * @return mixed $message 		the response body, parsed into PHP array/objects
 	 */
 	public function getResponseContent();
+
+	/**
+	 * Returns the raw response (before our intermediary wrapper parses it into PHP objects)
+	 * @return String $rawMessage 		the response body as received from the API
+	 */
+	public function getRawResponseContent();
 
 } //I_LsmCurl

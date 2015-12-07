@@ -17,7 +17,7 @@ $lsm->sendRequest();
 
 Util::getHeader();
 
-$response = json_decode( $lsm->getResponseContent() );
+$response = $lsm->getResponseContent();
 if( !$response || (int) $lsm->getResponseStatus() != 200 || !$response->isSuccess ) {
     Util::getTemplate( '500.php' );
     Util::getFooter();
@@ -25,7 +25,7 @@ if( !$response || (int) $lsm->getResponseStatus() != 200 || !$response->isSucces
 }
 
 if( DEBUG_API_CALLS )
-    echo "<pre>"; var_dump( $response ); echo"</pre>";
+    echo "<pre class='debug'>"; var_dump( $response ); echo"</pre>";
 
 ?>
 

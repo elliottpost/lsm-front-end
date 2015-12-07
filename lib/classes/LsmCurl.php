@@ -7,10 +7,14 @@
 class LsmCurl implements I_LsmCurl {
 
 	private $_ch;
+	private $_method;
 	private $_url;
 	private $_headers;
+	private $_parameters;
 	private $_responseStatus;
+	private $_responseHeaders;
 	private $_responseBody;
+	private $_rawResponseBody;
 
 	private $_debug;
 
@@ -24,67 +28,63 @@ class LsmCurl implements I_LsmCurl {
 
 		//set up default variables
 		$this->_headers = array();
-		$this->_ch = curl_init();
+		$this->_ch = new \Curl\Curl();
 
-        $this->_headers[] = 'Accept: application/json';
-        $this->_headers[] = 'Content-Type: application/json';
+        $this->addHeader( 'Accept', 'application/json' );
+        $this->addHeader( 'Content-Type', 'application/json' );
+
+        $this->_parameters = array();
 
         $this->_url = LSM_API_ENDPOINT;
 
 		$this->_responseStatus = null;
+		$this->_responseHeaders = null;
 		$this->_responseBody = null;
-
-        //set default method
-        curl_setopt( $this->_ch, CURLOPT_HTTPGET, true );		
+		$this->_rawResponseBody = null;
 
 	} //constructor
 
 	public function __destruct() {
-		//close the curl connection, if active
-		@curl_close( $this->_ch );
+		$this->_ch->close();
 	} //destructor
 
-	public function addHeader( $header ) {
-		if( !is_string( $header ) )
+	public function addHeader( $key, $value ) {
+		if( !is_string( $key ) || !is_string( $value ) )
 			throw new Exception( "Supplied paramater must be a string." );
-		$this->_headers[] = $header;
+		$this->_headers[ $key ] = $value;
 	} //addHeader
 
+	public function addParameter( $key, $value ) {
+		$this->_parameters[ $key ] = $value;
+	} //addParameter
+
+	public function setParameters( $parameters ) {
+		$this->_parameters = (array) $parameters;
+	} //setParameters	
+
 	public function addBasicAuth( $username, $password ) {
-		curl_setopt( $this->_ch, CURLOPT_USERPWD, $username . ":" . $password );
+		$this->_ch->setBasicAuthentication( $username, $password );
 	} //addBasicAuth
 
 	public function addLsmAuth() {
-		$this->addHeader( "email: " . Auth::getEmail() );
-		$this->addHeader( "password: " . Auth::getPasswordHash() );
+		$this->addHeader( "email", Auth::getEmail() );
+		$this->addHeader( "password", Auth::getPasswordHash() );
 	} //addLsmAuth
 
-	public function clearHeaders() {
-		$this->_headers = array();
-	} //clearHeaders
-
-	public function setBody( $body ) {
-		
-	} //addParameter
-
 	public function usePost() {
-		curl_reset( $this->_ch );
-        curl_setopt( $this->_ch, CURLOPT_POST, true );
+		$this->_method = "post";
 	} //usePost
 
 	public function useGet() {
-		curl_reset( $this->_ch );
-        curl_setopt( $this->_ch, CURLOPT_HTTPGET, true );
+		$this->_method = "get";
 	} //useGet
 
 	public function usePut() {
-		curl_reset( $this->_ch );
-		curl_setopt( $this->_ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+		$this->_method = "put";
 	} //usePut
 
 	public function useDelete() {
-		curl_reset( $this->_ch );
-		curl_setopt( $this->_ch, CURLOPT_CUSTOMREQUEST, 'DELETE' );
+		$this->_method = "delete";
 	} //useDelete
 
 	public function setEndpoint( $endpoint ) {
@@ -94,18 +94,40 @@ class LsmCurl implements I_LsmCurl {
 
 	public function sendRequest() {
 		$this->addLsmAuth();
-		curl_setopt( $this->_ch, CURLOPT_HTTPHEADER, $this->_headers );
-		curl_setopt( $this->_ch, CURLOPT_URL, $this->_url );
 
-        ob_start();
-        curl_exec( $this->_ch );
-        $this->_responseStatus = curl_getinfo( $this->_ch, CURLINFO_HTTP_CODE );
-        $this->_responseBody = ob_get_clean();
+		//add the headers
+		foreach( $this->_headers as $k => $v )
+			$this->_ch->setHeader( $k, $v );
+		
+		//determine our method and send the request
+		switch( $this->_method ):
+			case "post":
+				$this->_ch->post( $this->_url, $this->_parameters );
+				break;
+
+			case "get":
+				$this->_ch->get( $this->_url, $this->_parameters );
+				break;
+
+			case "put":
+				$this->_ch->put( $this->_url, $this->_parameters );
+				break;
+
+			case "delete":
+				$this->_ch->delete( $this->_url, $this->_parameters );
+				break;
+
+		endswitch;
+      		
+        $this->_responseHeaders = $this->_ch->responseHeaders; 
+        $this->_responseStatus = $this->_ch->httpStatusCode;
+        $this->_responseBody = $this->_ch->response;
+        $this->_rawResponseBody = $this->_ch->rawResponse;
 
         if( $this->_debug ) {
-        	echo "<p class='debug'><pre>DEBUG" . PHP_EOL;
+        	echo "<pre class='debug'><h3>DEBUG - DUMP OF LSM CURL WRAPPER:</h3>" . PHP_EOL;
         	var_dump( $this );
-        	echo "</pre></p>";
+        	echo "</pre>";
         }
 	} //sendRequest
 
@@ -113,8 +135,16 @@ class LsmCurl implements I_LsmCurl {
 		return $this->_responseStatus;
 	} //getResponseStatus
 
+	public function getResponseHeaders() {
+		return $this->_responseHeaders;
+	} //getResponseHeaders
+
 	public function getResponseContent() {
 		return $this->_responseBody;
 	} //getResponseContent
+
+	public function getRawResponseContent() {
+		return $this->_rawResponseBody;
+	} //getRawResponseContent
 
 } //LsmCurl
