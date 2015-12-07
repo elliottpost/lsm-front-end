@@ -28,6 +28,9 @@ define( "DEBUG_API_CALLS", true );
 setlocale( LC_MONETARY, 'en_US' );
 
 //do our includes
+#3rd party apps
+require_once SITE_ROOT . DS . 'vendor/autoload.php';
+
 #interfaces
 require_once SITE_ROOT . DS . 'lib/interfaces/I_Util.php';
 require_once SITE_ROOT . DS . 'lib/interfaces/I_Auth.php';
