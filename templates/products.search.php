@@ -1,7 +1,11 @@
 <?php
-require_once 'head.php';
+/**
+ * Shows the product search form
+ */
+
+Util::getHeader();
 ?>
-<!-- Page Heading -->
+
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">Search for products</h1>
@@ -15,6 +19,5 @@ require_once 'head.php';
         </form>
     </div>
 </div>
-<!-- /.row -->
 <?php
-require_once 'foot.php';
+Util::getFooter();

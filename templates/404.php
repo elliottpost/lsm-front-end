@@ -1,4 +1,8 @@
 <?php
+/**
+ * This template shows a 404 error
+ */
+
 Util::getHeader();
 ?>
 <!-- Page Heading -->

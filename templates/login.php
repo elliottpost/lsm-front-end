@@ -1,4 +1,8 @@
 <?php
+/**
+ * Displays login form
+ */
+
 Util::getHeader();
 ?>
 <!-- Page Heading -->

@@ -1,4 +1,8 @@
 <?php
+/**
+ * This template shows a 500 error and is used as a 'catch-all' for API failures, also
+ */
+
 Util::getHeader();
 ?>
 <!-- Page Heading -->

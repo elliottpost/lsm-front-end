@@ -1,4 +1,8 @@
 <?php
+/**
+ * Processes a request to login
+ */
+
 if( !isset( $_POST['email'], $_POST['password'] ) )
     Util::getTemplate( 'login.php' );
 

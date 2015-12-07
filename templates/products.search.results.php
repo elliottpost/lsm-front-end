@@ -1,4 +1,8 @@
 <?php
+/**
+ * Displays product search results
+ */
+
 //force a search query
 if( !isset( $_REQUEST['q'] ) || empty( $_REQUEST['q'] ) ) {
     Util::getTemplate( 'index.php' );
@@ -25,11 +29,22 @@ Util::getHeader();
     
     <?php
     $products = json_decode( $lsm->getResponseContent() );
-    if( !$products || (int) $lsm->getResponseStatus() != 200 ) {
+
+    if( (int) $lsm->getResponseStatus() != 200 ) {
         Util::getTemplate( '500.php' );
         Util::getFooter();
         return;
-    }    
+    }
+    
+    if( empty( $products ) ) {
+        ?>
+        <div class="row">
+            <div class="col-md-12">No results found</div>
+        </div>
+        <?php
+        Util::getFooter();
+        return;
+    }
     
     foreach( $products as $product ) {
         if( DEBUG_API_CALLS )

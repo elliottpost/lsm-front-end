@@ -1,3 +1,9 @@
+<?php
+/**
+ * This template is the footer of the base template
+ */
+ ?>
+
        <!-- Footer -->
         <footer>
             <div class="row">

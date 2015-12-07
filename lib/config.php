@@ -23,8 +23,9 @@ define( "LSM_API_ENDPOINT", "http://lsm1.herokuapp.com/services/lsm/" ); //shoul
 define( "LSM_AA_EMAIL_HEADER_NAME", "email" );
 define( "LSM_AA_PASS_HEADER_NAME", "password" );
 
-//set up site locals
+//set up site settings
 define( "DEBUG_API_CALLS", true );
+setlocale( LC_MONETARY, 'en_US' );
 
 //do our includes
 #interfaces

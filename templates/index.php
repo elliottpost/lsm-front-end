@@ -1,4 +1,8 @@
 <?php
+/**
+ * This template is entry point for the API
+ */
+
 Util::getHeader();
 ?>
 <!-- Page Heading -->

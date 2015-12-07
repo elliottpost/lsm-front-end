@@ -1,6 +1,7 @@
 <?php
-setlocale(LC_MONETARY, 'en_US');
-
+/**
+ * This template is the header of the base template
+ */
 ?><!DOCTYPE html>
 <html lang="en">
 
