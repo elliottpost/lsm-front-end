@@ -1,8 +1,12 @@
 <?php
 /**
- * @todo
  * Checks product availability
  */
+
+if( !Auth::isAuthenticated() ) {
+    Util::getTemplate( 'login.php' );
+    return;
+}
 
 //force a search query
 if( !isset( $_REQUEST['q'], $_REQUEST['entry'] ) || empty( $_REQUEST['q'] ) || empty( $_REQUEST['entry'] ) ) {
@@ -18,7 +22,8 @@ $lsm->sendRequest();
 Util::getHeader();
 
 $response = $lsm->getResponseContent();
-if( !$response || (int) $lsm->getResponseStatus() != 200 || !$response->isSuccess ) {
+$status = (int) $lsm->getResponseStatus();
+if( !$response || $status < 200 || $status > 204 || @!$response->isSuccess ) {
     Util::getTemplate( '500.php' );
     Util::getFooter();
     return;

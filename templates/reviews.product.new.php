@@ -4,6 +4,11 @@
  * This template is used for creating a new review
  */
 
+if( !Auth::isAuthenticated() ) {
+    Util::getTemplate( 'login.php' );
+    return;
+}
+
 //ensure we know what we're creating a review for
 if( !isset( $_REQUEST['q'], $_REQUEST['entry'] ) || empty( $_REQUEST['q'] ) || empty( $_REQUEST['entry'] ) ) {
     Util::getTemplate( 'products.search.php' );

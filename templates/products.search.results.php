@@ -3,6 +3,11 @@
  * Displays product search results
  */
 
+if( !Auth::isAuthenticated() ) {
+    Util::getTemplate( 'login.php' );
+    return;
+}
+
 //force a search query
 if( !isset( $_REQUEST['q'] ) || empty( $_REQUEST['q'] ) ) {
     Util::getTemplate( 'index.php' );

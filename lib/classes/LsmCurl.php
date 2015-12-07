@@ -20,9 +20,10 @@ class LsmCurl implements I_LsmCurl {
 
 	/**
 	 * Sets up the the instance vars and sets default options for the 
+	 * @param bool $debug 		to force debug on or off, otherwise defaults to site config settings
 	 */
-	public function __construct( $debug = false ) {
-		if( !$debug )
+	public function __construct( $debug = null ) {
+		if( $debug === null )
 			$debug = DEBUG_API_CALLS;
 		$this->_debug = $debug;
 
@@ -93,7 +94,9 @@ class LsmCurl implements I_LsmCurl {
 	} //setEndpoint
 
 	public function sendRequest() {
-		$this->addLsmAuth();
+		//add authentication headers, if they exist
+		if( Auth::isAuthenticated() )
+			$this->addLsmAuth();
 
 		//add the headers
 		foreach( $this->_headers as $k => $v )
@@ -105,6 +108,7 @@ class LsmCurl implements I_LsmCurl {
 				$this->_ch->post( $this->_url, $this->_parameters );
 				break;
 
+			default:
 			case "get":
 				$this->_ch->get( $this->_url, $this->_parameters );
 				break;

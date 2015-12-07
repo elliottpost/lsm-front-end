@@ -3,6 +3,11 @@
  * Shows the product search form
  */
 
+if( !Auth::isAuthenticated() ) {
+    Util::getTemplate( 'login.php' );
+    return;
+}
+
 Util::getHeader();
 ?>
 

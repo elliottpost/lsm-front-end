@@ -52,7 +52,22 @@
                     if( Auth::isAuthenticated() ) {
                         ?>
                         <li>
+                            <a href="<?=SITE_URI?>product/create">New Product</a>
+                        </li>
+                        <li>
+                            <a href="<?=SITE_URI?>partner/report">Partner Report</a>
+                        </li>                        
+                        <li>
                             <a href="<?=SITE_URI?>logout">Logout</a>
+                        </li>
+                        <?php
+                    } else {
+                        ?>
+                        <li>
+                            <a href="<?=SITE_URI?>customer/create">Register as Customer</a>
+                        </li>                        
+                        <li>
+                            <a href="<?=SITE_URI?>partner/create">Register as Partner</a>
                         </li>
                         <?php
                     }

@@ -3,14 +3,24 @@
  * Displays details about a product
  */
 
+if( !Auth::isAuthenticated() ) {
+    Util::getTemplate( 'login.php' );
+    return;
+}
+
 //force a search query
-if( !isset( $_REQUEST['q'], $_REQUEST['entry'] ) || empty( $_REQUEST['q'] ) || empty( $_REQUEST['entry'] ) ) {
+if( !isset( $_REQUEST['q'] ) || empty( $_REQUEST['q'] ) ) {
     Util::getTemplate( 'products.search.php' );
     return;
 }
 
+if( isset( $_REQUEST['entry'] ) )
+    $entry = ApiLinks::decodeHateoasLink( $_REQUEST['entry'] );
+else
+    $entry = LSM_API_ENDPOINT . "product-by-id/" . $_REQUEST['q'] ;
+
 $lsm = new LsmCurl;
-$lsm->setEndpoint( ApiLinks::decodeHateoasLink( $_REQUEST['entry'] ) );
+$lsm->setEndpoint( $entry );
 $lsm->useGet();
 $lsm->sendRequest();
 

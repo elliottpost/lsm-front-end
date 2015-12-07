@@ -3,6 +3,12 @@
  * This template is entry point for the API
  */
 
+if( !Auth::isAuthenticated() ) {
+    Util::getTemplate( 'login.php' );
+    return;
+}
+
+
 Util::getHeader();
 ?>
 <!-- Page Heading -->

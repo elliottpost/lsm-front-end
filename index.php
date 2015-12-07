@@ -12,18 +12,8 @@ require_once SITE_ROOT . '/lib/config.php';
 
 // echo "<pre>"; var_dump( $_GET );echo "</pre>";
 
-//authenticate & authorize the user
+//start our session
 Auth::startSession();
-if( !Auth::isAuthenticated() ) {
-	//the user needs to be authenticated
-	if( isset( $_POST['do-authenticate'] ) ) {
-		Util::getTemplate( 'login.do.php' );
-		return;		
-	}
-
-	Util::getTemplate( 'login.php' );
-	return;
-}
 
 //get the requested template
 if( !isset( $_GET['p1'] ) ) {
