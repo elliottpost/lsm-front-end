@@ -11,34 +11,39 @@ if( !isset( $_REQUEST['q'], $_REQUEST['entry'] ) || empty( $_REQUEST['q'] ) || e
 }
 
 $lsm = new LsmCurl;
-$lsm->setEndpoint( Util::decodeHateoasLink( $_REQUEST['entry'] ) );
+$lsm->setEndpoint( ApiLinks::decodeHateoasLink( $_REQUEST['entry'] ) );
 $lsm->useGet();
 $lsm->sendRequest();
 
 Util::getHeader();
 
-$product = json_decode( $lsm->getResponseContent() );
-if( !$product || (int) $lsm->getResponseStatus() != 200 ) {
+$response = json_decode( $lsm->getResponseContent() );
+if( !$response || (int) $lsm->getResponseStatus() != 200 || !$response->isSuccess ) {
     Util::getTemplate( '500.php' );
     Util::getFooter();
     return;
 }
 
 if( DEBUG_API_CALLS )
-    echo "<pre>"; var_dump( $product ); echo"</pre>";
+    echo "<pre>"; var_dump( $response ); echo"</pre>";
 
 ?>
 
-<!-- Page Heading -->
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header"><?=$product->productName?> <small>$<?=money_format( '%i', $product->price );?></small></h1>
-        <p><?=$product->description?></p>
-    </div>
-
-    
+        <h1 class="page-header"><?=$response->message?></h1>
+    </div> 
 </div>
-<!-- /.row -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <?php 
+        //force our system to use the current product ID as the product ID in question
+        $response->productID = (int) $_GET['q'];
+        echo ApiLinks::linksToHtml( $response );
+        ?>
+    </div>
+</div>
 
 <?php
 Util::getFooter();

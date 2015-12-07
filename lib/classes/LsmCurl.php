@@ -63,8 +63,8 @@ class LsmCurl implements I_LsmCurl {
 		$this->_headers = array();
 	} //clearHeaders
 
-	public function addParameter() {
-		//@todo
+	public function setBody( $body ) {
+		
 	} //addParameter
 
 	public function usePost() {

@@ -11,7 +11,7 @@ if( !isset( $_REQUEST['q'], $_REQUEST['entry'] ) || empty( $_REQUEST['q'] ) || e
 }
 
 $lsm = new LsmCurl;
-$lsm->setEndpoint( Util::decodeHateoasLink( $_REQUEST['entry'] ) );
+$lsm->setEndpoint( ApiLinks::decodeHateoasLink( $_REQUEST['entry'] ) );
 $lsm->useGet();
 $lsm->sendRequest();
 

@@ -60,7 +60,9 @@ Util::getHeader();
                 <h3><?=$product->productName;?></h3>
                 <h4>$<?=money_format( '%i', $product->price );?></h4>
                 <p><?=$product->description?></p>
-                <a class="btn btn-primary" href="<?=SITE_URI?>product/detail/q/<?=$product->productID?>?entry=<?=Util::encodeHateoasLink( $product->link[0]->url )?>"><?=$product->link[0]->action?> <span class="glyphicon glyphicon-chevron-right"></span></a>
+                <?php 
+                echo ApiLinks::linksToHtml( $product );
+                ?>
             </div>
         </div>
         <!-- /.row -->

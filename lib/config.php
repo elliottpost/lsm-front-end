@@ -29,12 +29,14 @@ setlocale( LC_MONETARY, 'en_US' );
 
 //do our includes
 #interfaces
-require_once SITE_ROOT . DS . 'lib/interfaces/I_LsmCurl.php';
 require_once SITE_ROOT . DS . 'lib/interfaces/I_Util.php';
 require_once SITE_ROOT . DS . 'lib/interfaces/I_Auth.php';
+require_once SITE_ROOT . DS . 'lib/interfaces/I_LsmCurl.php';
+require_once SITE_ROOT . DS . 'lib/interfaces/I_ApiLinks.php';
 
 #classes
-require_once SITE_ROOT . DS . 'lib/classes/LsmCurl.php';
 require_once SITE_ROOT . DS . 'lib/classes/Util.php';
 require_once SITE_ROOT . DS . 'lib/classes/Auth.php';
+require_once SITE_ROOT . DS . 'lib/classes/LsmCurl.php';
+require_once SITE_ROOT . DS . 'lib/classes/ApiLinks.php';
 
