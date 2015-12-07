@@ -23,5 +23,18 @@ interface I_Util {
 	 */
 	public static function getFooter();
 
+	/**
+	 * Encodes a HATEOAS link in base64 & url encoded
+	 * @param String $link 			the HATEOAS link to encode
+	 * @return String $encodedLink	the encoded HATEOAS link
+	 */
+	public static function encodeHateoasLink( $link );
+
+	/**
+	 * Decodes an encoded HATEOAS link in base64 & url encoded
+	 * @param String $encodedlink	the HATEOAS link to decode
+	 * @return String $link			the original HATEOAS link
+	 */
+	public static function decodeHateoasLink( $link );
 
 } //I_Util

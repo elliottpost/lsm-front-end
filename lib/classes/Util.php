@@ -23,4 +23,12 @@ abstract class Util implements I_Util {
 		static::getTemplate( "footer.php" );
 	} //getFooter
 
+	public static function encodeHateoasLink( $link ) {
+		return urlencode( base64_encode( $link ) );
+	} //encodeHateoasLink
+
+	public static function decodeHateoasLink( $link ) {
+		return urldecode( base64_decode( $link ) );
+	} //decodeHateoasLink	
+
 } //Util

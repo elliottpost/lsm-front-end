@@ -18,6 +18,8 @@ class LsmCurl implements I_LsmCurl {
 	 * Sets up the the instance vars and sets default options for the 
 	 */
 	public function __construct( $debug = false ) {
+		if( !$debug )
+			$debug = DEBUG_API_CALLS;
 		$this->_debug = $debug;
 
 		//set up default variables
