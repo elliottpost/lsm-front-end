@@ -48,6 +48,15 @@ class LsmCurl implements I_LsmCurl {
 		$this->_headers[] = $header;
 	} //addHeader
 
+	public function addBasicAuth( $username, $password ) {
+		curl_setopt( $this->_ch, CURLOPT_USERPWD, $username . ":" . $password );
+	} //addBasicAuth
+
+	public function addLsmAuth() {
+		$this->addHeader( "email: " . Auth::getEmail() );
+		$this->addHeader( "password: " . Auth::getPasswordHash() );
+	} //addLsmAuth
+
 	public function clearHeaders() {
 		$this->_headers = array();
 	} //clearHeaders
@@ -82,6 +91,7 @@ class LsmCurl implements I_LsmCurl {
 	} //setEndpoint
 
 	public function sendRequest() {
+		$this->addLsmAuth();
 		curl_setopt( $this->_ch, CURLOPT_HTTPHEADER, $this->_headers );
 		curl_setopt( $this->_ch, CURLOPT_URL, $this->_url );
 

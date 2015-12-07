@@ -19,6 +19,12 @@ class Auth implements I_Auth {
 		$_SESSION['passwordHash'] = md5( $password );
 	} //authenticate
 
+	public static function isAuthenticated() {
+		if( empty( static::getEmail() ) || empty( static::getPasswordHash() ) )
+			return false;
+		return true;
+	} //isAuthenticated
+
 	public static function getEmail() {
 		return isset( $_SESSION['email'] ) ? $_SESSION['email'] : null;
 	} //getemail

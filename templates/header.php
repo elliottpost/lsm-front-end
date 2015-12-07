@@ -47,12 +47,18 @@ setlocale(LC_MONETARY, 'en_US');
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="<?=SITE_URI?>logout">Logout</a>
-                    </li>
+                    <?php
+                    if( Auth::isAuthenticated() ) {
+                        ?>
+                        <li>
+                            <a href="<?=SITE_URI?>logout">Logout</a>
+                        </li>
+                        <?php
+                    }
+                    ?>
                 </ul>
                 <?php
-                if( empty( Auth::getEmail() ) || empty( Auth::getPasswordHash() ) ) {
+                if( Auth::isAuthenticated() ) {
                     ?>
                     <div class="col-sm-3 col-md-3">
                         <form class="navbar-form" role="search" action='<?=SITE_URI?>products/search/results' method='post'>    

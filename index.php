@@ -12,7 +12,7 @@ require_once SITE_ROOT . '/lib/config.php';
 
 //authenticate & authorize the user
 Auth::startSession();
-if( empty( Auth::getEmail() ) || empty( Auth::getPasswordHash() ) ) {
+if( !Auth::isAuthenticated() ) {
 	//the user needs to be authenticated
 	if( isset( $_POST['do-authenticate'] ) ) {
 		Util::getTemplate( 'login.do.php' );

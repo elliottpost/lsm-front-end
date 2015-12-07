@@ -1,3 +1,3 @@
 <?php
 Auth::destroySession();
-header( "Location: " . SITE_ADDR );
+header( "Location: " . SITE_URI );

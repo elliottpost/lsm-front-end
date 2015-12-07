@@ -25,6 +25,20 @@ interface I_LsmCurl {
 	public function addParameter();
 
 	/**
+	 * Adds basic auth to the request
+	 * @param String $username 	the username
+	 * @param String $password 	the password
+	 */
+	public function addBasicAuth( $username, $password );
+
+	/**
+	 * Adds LSM Authorization from the current session
+	 * @uses Auth::getEmail()
+	 * @uses Auth::getPasswordHash()
+	 */
+	public function addLsmAuth();	
+
+	/**
 	 * Sets the curl request to use POST
 	 */
 	public function usePost();

@@ -24,6 +24,12 @@ interface I_Auth {
 	public static function authenticate( $email, $password );
 
 	/**
+	 * checks only if SESSION is initiated and user data exists
+	 * @return bool
+	 */
+	public static function isAuthenticated();
+
+	/**
 	 * gets the email from SESSION
 	 * @return String $username
 	 */
