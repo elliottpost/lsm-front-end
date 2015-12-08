@@ -1,7 +1,7 @@
 <?php
 /**
  * @todo
- * This template is used for viewing a product review
+ * This template is used for viewing a partner review
  */
 
 if( !Auth::isAuthenticated() ) {
@@ -11,7 +11,7 @@ if( !Auth::isAuthenticated() ) {
 
 //ensure we know what we're creating a review for
 if( !isset( $_REQUEST['q'], $_REQUEST['entry'] ) || empty( $_REQUEST['q'] ) || empty( $_REQUEST['entry'] ) ) {
-    Util::getTemplate( 'products.search.php' );
+    Util::getTemplate( 'partners.search.php' );
     return;
 }
 
@@ -36,7 +36,7 @@ if( DEBUG_API_CALLS )
 <!-- Page Heading -->
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Product Reviews</h1>
+        <h1 class="page-header">Partner Reviews</h1>
     </div>
 </div>
 
@@ -45,7 +45,7 @@ if( empty( $reviews ) ) {
     ?>
     <div class="row">
         <div class="col-lg-12">
-            No Product Reviews Found
+            No Partner Reviews Found
         </div>
     </div>    
     <?php

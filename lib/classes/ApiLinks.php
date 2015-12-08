@@ -44,7 +44,7 @@ abstract class ApiLinks implements I_ApiLinks {
                     $class = 'btn-primary';
                     $resourceId = $response->productID;
                     $internalLink .= "product/detail/q/{$response->productID}?entry={$entry}";
-                    break; 
+                    break;                
 
 
 
@@ -65,6 +65,20 @@ abstract class ApiLinks implements I_ApiLinks {
                     $resourceId = $response->productID;
                     $internalLink .= "reviews/product/q/{$response->productID}?entry={$entry}";
                     break; 
+
+                case "Create Partner Review":
+                    $data['method'] = 'create-partner-review';
+                    $class = 'btn-primary';
+                    $resourceId = $response->partnerID;
+                    $internalLink .= "reviews/partner/create/q/{$response->partnerID}?entry={$entry}";
+                    break;
+
+                case "Get Partner Reviews":
+                    $data['method'] = 'get-partner-reviews';
+                    $class = 'btn-primary';
+                    $resourceId = $response->partnerID;
+                    $internalLink .= "reviews/partner/q/{$response->partnerID}?entry={$entry}";
+                    break;                     
 
 
 
@@ -91,6 +105,14 @@ abstract class ApiLinks implements I_ApiLinks {
                 #----------
                 # Partners
                 #----------
+                case "Get Partner Details":
+                case "Get Seller Details":
+                    $data['method'] = 'get-partner-details';
+                    $class = 'btn-primary';
+                    $resourceId = $response->partnerID;
+                    $internalLink .= "partner/detail/q/{$response->partnerID}?entry={$entry}";
+                    break;      
+
                 case "Delete Partner":
                     $data['method'] = 'delete-partner';
                     $class = 'confirm-delete btn-danger';
