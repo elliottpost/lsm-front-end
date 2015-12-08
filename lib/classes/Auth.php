@@ -33,4 +33,12 @@ class Auth implements I_Auth {
 		return isset( $_SESSION['passwordHash'] ) ? $_SESSION['passwordHash'] : null;
 	} //getPasswordHash
 
+	public static function setCustomerId( $customerId ) {
+		$_SESSION['customerId'] = (int) $customerId;
+	} //setCustomerId
+
+	public static function getCustomerId() {
+		return isset( $_SESSION['customerId'] ) ? $_SESSION['customerId'] : null;
+	} //getCustomerId	
+
 } //Auth

@@ -1,6 +1,6 @@
 <?php
 /**
- * processes a delete request for partner
+ * Shows partner details
  */
 
 if( !Auth::isAuthenticated() ) {
@@ -14,48 +14,45 @@ if( !isset( $_REQUEST['q'] ) || empty( $_REQUEST['q'] ) ) {
     return;
 }
 
-//ensure the user has verfied they want to delete the partner
-if( !isset( $_REQUEST['verified'] ) || (int) $_REQUEST['verified'] != 1 ) {
-    Util::getTemplate( 'partner.detail.php' ); 
-    return;
-}
-
 if( isset( $_REQUEST['entry'] ) )
     $entry = ApiLinks::decodeHateoasLink( $_REQUEST['entry'] );
 else
-    $entry = LSM_API_ENDPOINT . "partner/" . $_REQUEST['q'] ;
+    $entry = LSM_API_ENDPOINT . "report/" . $_REQUEST['q'] ;
 
 
 $lsm = new LsmCurl;
 $lsm->setEndpoint( $entry );
-$lsm->useDelete();
+$lsm->useGet();
 $lsm->sendRequest();
 
-Util::getHeader();  
+Util::getHeader();
 
-$response = $lsm->getResponseContent();
-if( !$response || (int) $lsm->getResponseStatus() != 200 || @!$response->isSuccess ) {
- 
+$report = $lsm->getResponseContent();
+if( !$report || (int) $lsm->getResponseStatus() != 200 ) {
     Util::getTemplate( '500.php' );
     Util::getFooter();
     return;
 }
 
 if( DEBUG_API_CALLS )
-    echo "<pre class='debug'>"; var_dump( $response ); echo"</pre>";
+    echo "<pre class='debug'>"; var_dump( $report ); echo"</pre>";
+
 ?>
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Partner (Soft) Deleted Successfully</h1>
+        <h1 class="page-header">Partner Report</h1>
+
+            
     </div>
 </div>
 
 <div class="row">
     <div class="col-lg-12">
         <?php 
-        echo ApiLinks::linksToHtml( $response );
+        echo ApiLinks::linksToHtml( $report );
         ?>
     </div>
 </div>
+
 <?php
 Util::getFooter();

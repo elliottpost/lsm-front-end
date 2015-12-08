@@ -54,10 +54,7 @@
                         ?>
                         <li>
                             <a href="<?=SITE_URI?>product/create">New Product</a>
-                        </li>
-                        <li>
-                            <a href="<?=SITE_URI?>partner/report">Partner Report</a>
-                        </li>                        
+                        </li>                       
                         <li>
                             <a href="<?=SITE_URI?>logout">Logout</a>
                         </li>

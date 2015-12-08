@@ -29,6 +29,7 @@ Util::getHeader();
 
 $customer = $lsm->getResponseContent();
 if( !$customer || (int) $lsm->getResponseStatus() != 200 ) {
+
     Util::getTemplate( '500.php' );
     Util::getFooter();
     return;
@@ -36,16 +37,13 @@ if( !$customer || (int) $lsm->getResponseStatus() != 200 ) {
 
 if( DEBUG_API_CALLS )
     echo "<pre class='debug'>"; var_dump( $customer ); echo"</pre>";
-
-
-Util::getHeader();
 ?>
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">Customer Details</h1>
 
             <div class="form-group">
-                <label><input type="checkbox"  placeholder="Title" name="title" <?php if( $customer->isActive) echo 'checked'; ?> disabled> Active User (Not Soft Deleted)</label>
+                <label><input type="checkbox" name="isActive" <?php if( $customer->isActive) echo 'checked'; ?> disabled> Active User (Not Soft Deleted)</label>
             </div>
 
             <div class="form-group">

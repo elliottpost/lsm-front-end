@@ -20,7 +20,7 @@ Auth::authenticate( $_POST['email'], $_POST['password'] );
 
 //test credentials
 $lsm = new LsmCurl( false ); //force debug mode off
-$lsm->setEndpoint( LSM_API_ENDPOINT . "authenticate" );
+$lsm->setEndpoint( LSM_API_ENDPOINT . "authenticate/customer" ); //change to /authenticate, or /authenticate/customer accordingly
 $lsm->useGet();
 
 //send the request
@@ -50,6 +50,10 @@ if( $status < 200 || $status > 204 || @!$response->isSuccess ) {
     Util::getTemplate( 'login.php' );  
     return;
 }
+
+Auth::setCustomerId( $response->genericReturnValue );
+// if( DEBUG_API_CALLS )
+//     echo "<pre class='debug'>"; var_dump( $response ); echo"</pre>";
 
 //authenticated successfully
 header( "Location: " . SITE_URI );

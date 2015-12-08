@@ -51,4 +51,16 @@ interface I_Auth {
 	 */
 	public static function destroySession();	
 
+	/**
+	 * saves a customer ID to the session
+	 * @param int $customerID 	the customer ID
+	 */
+	public static function setCustomerId( $customerId );
+
+	/**
+	 * Gets a customer ID from the session
+	 * @param int $sessionID 	or null on not customer
+	 */
+	public static function getCustomerId();
+
 } //I_Auth

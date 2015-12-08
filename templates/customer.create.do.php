@@ -76,6 +76,7 @@ Util::getHeader();
 $response = $lsm->getResponseContent();
 $status = (int) $lsm->getResponseStatus();
 if( !$response || $status < 200 || $status > 204 || @!$response->isSuccess ) {
+
     Util::getTemplate( '500.php' );
     Util::getFooter();
     return;
@@ -83,8 +84,6 @@ if( !$response || $status < 200 || $status > 204 || @!$response->isSuccess ) {
 
 if( DEBUG_API_CALLS )
     echo "<pre class='debug'>"; var_dump( $response ); echo"</pre>";
-
-Util::getHeader();
 ?>
 <div class="row">
     <div class="col-lg-12">

@@ -34,12 +34,13 @@ Util::getHeader();
     
     <?php
     $products = $lsm->getResponseContent();
+    $status = (int) $lsm->getResponseStatus();
 
-    if( (int) $lsm->getResponseStatus() != 200 ) {
+    if( $status < 200 || $status > 204 ) {
         Util::getTemplate( '500.php' );
         Util::getFooter();
         return;
-    }
+    } 
     
     if( empty( $products ) ) {
         ?>
@@ -70,9 +71,6 @@ Util::getHeader();
                 ?>
             </div>
         </div>
-        <!-- /.row -->
-
-        <hr>
 
         <?php
     } //foreach products as product

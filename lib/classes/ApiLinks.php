@@ -22,31 +22,35 @@ abstract class ApiLinks implements I_ApiLinks {
             switch( $link->action ):
                 case "Check Product Availability":
                     $data['method'] = 'check-product-availability';
+                    $class = 'confirm-delete btn-primary';
                     $resourceId = $response->productID;
                     $internalLink .= "product/availability/q/{$response->productID}?entry={$entry}";
                     break;
 
                 case "Create Product Review":
                     $data['method'] = 'create-product-review';
+                    $class = 'btn-primary';
                     $resourceId = $response->productID;
                     $internalLink .= "reviews/product/new/q/{$response->productID}?entry={$entry}";
                     break;
 
                 case "Get Product Reviews":
                     $data['method'] = 'get-product-reviews';
+                    $class = 'btn-primary';
                     $resourceId = $response->productID;
                     $internalLink .= "reviews/product/q/{$response->productID}?entry={$entry}";
                     break; 
 
                 case "Buy Product":
-                    //@todo 
                     $data['method'] = 'buy-product';
+                    $class = 'btn-primary';
                     $resourceId = $response->productID;
-                    $internalLink .= "product/order/q/{$response->productID}?entry={$entry}";
+                    $internalLink .= "product/order/do/q/{$response->productID}?entry={$entry}";
                     break; 
 
                 case "Get Product Details":
                     $data['method'] = 'get-product-details';
+                    $class = 'btn-primary';
                     $resourceId = $response->productID;
                     $internalLink .= "product/detail/q/{$response->productID}?entry={$entry}";
                     break; 
@@ -54,18 +58,63 @@ abstract class ApiLinks implements I_ApiLinks {
                 case "Delete Customer":
                     $data['method'] = 'delete-customer';
                     $class = 'confirm-delete btn-danger';
-                    $resourceId = $response->customerId;
-                    $internalLink .= "customer/delete/do/q/{$response->customerId}?entry={$entry}&verified=1";
+                    $resourceId = $response->customerID;
+                    $internalLink .= "customer/delete/do/q/{$response->customerID}?entry={$entry}&verified=1";
+                    break; 
+
+                case "Delete Partner":
+                    $data['method'] = 'delete-partner';
+                    $class = 'confirm-delete btn-danger';
+                    $resourceId = $response->partnerID;
+                    $internalLink .= "partner/delete/do/q/{$response->partnerID}?entry={$entry}&verified=1";
+                    break; 
+
+                case "Check Product Availability":
+                    $data['method'] = 'check-product-availability';
+                    $class = 'btn-primary';
+                    $resourceId = $response->productID;
+                    $internalLink .= "product/availability/q/{$response->productID}?entry={$entry}";
+                    break;
+
+                case "Generate Report":
+                    $data['method'] = 'generate-partner-report';
+                    $class = 'btn-primary';
+                    $resourceId = $response->partnerID;
+                    $internalLink .= "partner/report/q/{$response->partnerID}?entry={$entry}";
+                    break;
+
+                case "Get Order Detail":
+                    //@todo
+                    $data['method'] = 'get-order-details';
+                    $class = 'btn-primary';
+                    $resourceId = $response->orderID;
+                    $internalLink .= "order/detail/q/{$response->orderID}?entry={$entry}";
+                    break;
+
+                case "Cancel Order":
+                    //@todo
+                    $data['method'] = 'cancel-order';
+                    $class = "confirm-delete btn-danger";
+                    $resourceId = $response->orderID;
+                    $internalLink .= "order/cancel/do/q/{$response->orderID}?entry={$entry}";
+                    break; 
+
+                case "Ship Order":
+                    //@todo
+                    $data['method'] = 'ship-order';
+                    $class = 'btn-primary';
+                    $resourceId = $response->orderID;
+                    $internalLink .= "order/ship/q/{$response->orderID}?entry={$entry}";
                     break; 
 
                 default:
-                    //unknown link, our system can't handle that. just skip it
-                    continue;
+                    //unknown link, our system can't handle that. just print normal
+                    break;
             endswitch;
             ?>
             <div class="form-group">
                 <a 
-                    class="btn btn-default <?=$class?>"
+                    class="btn <?=$class?>"
                     data-method="<?=$data['method']?>"
                     data-resource-id="<?=$resourceId?>"
                     href="<?=$internalLink?>"

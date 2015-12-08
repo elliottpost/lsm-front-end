@@ -38,26 +38,22 @@ if( DEBUG_API_CALLS )
     echo "<pre class='debug'>"; var_dump( $partner ); echo"</pre>";
 
 
-Util::getHeader();
+
 ?>
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">Partner Details</h1>
 
             <div class="form-group">
-                <label><input type="checkbox"  placeholder="Title" name="title" <?php if( $partner->isActive) echo 'checked'; ?> disabled> Active User (Not Soft Deleted)</label>
+                <label><input type="checkbox" name="isActive" <?php if( $partner->isActive) echo 'checked'; ?> disabled> Active User (Not Soft Deleted)</label>
             </div>
 
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Title" name="title" disabled value="<?=$partner->title?>">
+                <input type="text" class="form-control" placeholder="Partner (Business) Name" name="partnerName" disabled value="<?=$partner->partnerName?>">
             </div>
 
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="First Name" name="firstName" disabled value="<?=$partner->firstName?>">
-            </div>
-
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Last Name" name="lastName" disabled value="<?=$partner->lastName?>">
+                <input type="text" class="form-control" placeholder="Contact Name" name="contactName" disabled value="<?=$partner->contactName?>">
             </div>
 
             <div class="form-group">
