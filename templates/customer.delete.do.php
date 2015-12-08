@@ -1,6 +1,6 @@
 <?php
 /**
- * Form for creating a new customer
+ * processes a request to delete a customer
  */
 
 if( !Auth::isAuthenticated() ) {

@@ -1,6 +1,6 @@
 <?php
 /**
- * Form for creating a new customer
+ * Shows partner details
  */
 
 if( !Auth::isAuthenticated() ) {
@@ -10,14 +10,14 @@ if( !Auth::isAuthenticated() ) {
 
 //force a search query
 if( !isset( $_REQUEST['q'] ) || empty( $_REQUEST['q'] ) ) {
-    Util::getTemplate( 'index.php' ); //@todo change to customers.search.php if feature gets built
+    Util::getTemplate( 'index.php' ); //@todo change to partners.search.php if feature gets built
     return;
 }
 
 if( isset( $_REQUEST['entry'] ) )
     $entry = ApiLinks::decodeHateoasLink( $_REQUEST['entry'] );
 else
-    $entry = LSM_API_ENDPOINT . "customer/" . $_REQUEST['q'] ;
+    $entry = LSM_API_ENDPOINT . "partner/" . $_REQUEST['q'] ;
 
 
 $lsm = new LsmCurl;
@@ -27,45 +27,45 @@ $lsm->sendRequest();
 
 Util::getHeader();
 
-$customer = $lsm->getResponseContent();
-if( !$customer || (int) $lsm->getResponseStatus() != 200 ) {
+$partner = $lsm->getResponseContent();
+if( !$partner || (int) $lsm->getResponseStatus() != 200 ) {
     Util::getTemplate( '500.php' );
     Util::getFooter();
     return;
 }
 
 if( DEBUG_API_CALLS )
-    echo "<pre class='debug'>"; var_dump( $customer ); echo"</pre>";
+    echo "<pre class='debug'>"; var_dump( $partner ); echo"</pre>";
 
 
 Util::getHeader();
 ?>
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Customer Details</h1>
+        <h1 class="page-header">Partner Details</h1>
 
             <div class="form-group">
-                <label><input type="checkbox"  placeholder="Title" name="title" <?php if( $customer->isActive) echo 'checked'; ?> disabled> Active User (Not Soft Deleted)</label>
+                <label><input type="checkbox"  placeholder="Title" name="title" <?php if( $partner->isActive) echo 'checked'; ?> disabled> Active User (Not Soft Deleted)</label>
             </div>
 
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Title" name="title" disabled value="<?=$customer->title?>">
+                <input type="text" class="form-control" placeholder="Title" name="title" disabled value="<?=$partner->title?>">
             </div>
 
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="First Name" name="firstName" disabled value="<?=$customer->firstName?>">
+                <input type="text" class="form-control" placeholder="First Name" name="firstName" disabled value="<?=$partner->firstName?>">
             </div>
 
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Last Name" name="lastName" disabled value="<?=$customer->lastName?>">
+                <input type="text" class="form-control" placeholder="Last Name" name="lastName" disabled value="<?=$partner->lastName?>">
             </div>
 
             <div class="form-group">
-                <input type="email" class="form-control" placeholder="Email" name="email" disabled value="<?=$customer->email?>">
+                <input type="email" class="form-control" placeholder="Email" name="email" disabled value="<?=$partner->email?>">
             </div>
 
             <div class="form-group">
-                <input type="tel" class="form-control" placeholder="Phone" name="phone" disabled value="<?=$customer->phone?>">
+                <input type="tel" class="form-control" placeholder="Phone" name="phone" disabled value="<?=$partner->phone?>">
             </div>
     </div>
 </div>
@@ -73,7 +73,7 @@ Util::getHeader();
 <div class="row">
     <div class="col-lg-12">
         <?php 
-        echo ApiLinks::linksToHtml( $customer );
+        echo ApiLinks::linksToHtml( $partner );
         ?>
     </div>
 </div>

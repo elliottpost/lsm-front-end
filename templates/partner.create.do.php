@@ -1,6 +1,6 @@
 <?php
 /**
- * Form for creating a new product
+ * Processes request to add partner
  */
 
 if( Auth::isAuthenticated() ) {

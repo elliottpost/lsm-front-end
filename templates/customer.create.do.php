@@ -1,6 +1,6 @@
 <?php
 /**
- * Form for creating a new product
+ * processes a request for creating a customer
  */
 
 if( Auth::isAuthenticated() ) {

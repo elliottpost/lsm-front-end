@@ -1,6 +1,6 @@
 <?php
 /**
- * Form for creating a new customer
+ * Shows customer details
  */
 
 if( !Auth::isAuthenticated() ) {

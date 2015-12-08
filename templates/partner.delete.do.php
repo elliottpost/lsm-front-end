@@ -1,6 +1,6 @@
 <?php
 /**
- * Form for creating a new customer
+ * processes a delete request for partner
  */
 
 if( !Auth::isAuthenticated() ) {
@@ -10,20 +10,20 @@ if( !Auth::isAuthenticated() ) {
 
 //force a search query
 if( !isset( $_REQUEST['q'] ) || empty( $_REQUEST['q'] ) ) {
-    Util::getTemplate( 'index.php' ); //@todo change to customers.search.php if feature gets built
+    Util::getTemplate( 'index.php' ); //@todo change to partners.search.php if feature gets built
     return;
 }
 
-//ensure the user has verfied they want to delete the customer
+//ensure the user has verfied they want to delete the partner
 if( !isset( $_REQUEST['verified'] ) || (int) $_REQUEST['verified'] != 1 ) {
-    Util::getTemplate( 'customer.detail.php' ); 
+    Util::getTemplate( 'partner.detail.php' ); 
     return;
 }
 
 if( isset( $_REQUEST['entry'] ) )
     $entry = ApiLinks::decodeHateoasLink( $_REQUEST['entry'] );
 else
-    $entry = LSM_API_ENDPOINT . "customer/" . $_REQUEST['q'] ;
+    $entry = LSM_API_ENDPOINT . "partner/" . $_REQUEST['q'] ;
 
 
 $lsm = new LsmCurl;
@@ -48,7 +48,7 @@ Util::getHeader();
 ?>
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Customer (Soft) Deleted Successfully</h1>
+        <h1 class="page-header">partner (Soft) Deleted Successfully</h1>
     </div>
 </div>
 
