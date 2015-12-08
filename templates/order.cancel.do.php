@@ -31,16 +31,13 @@ $lsm->setEndpoint( $entry );
 $lsm->useDelete();
 $lsm->sendRequest();
 
-Util::getHeader();
-
 $response = $lsm->getResponseContent();
 if( !$response || (int) $lsm->getResponseStatus() != 200 || @!$response->isSuccess ) {
-
     Util::getTemplate( '500.php' );
-    Util::getFooter();
     return;
 }
 
+Util::getHeader();
 if( DEBUG_API_CALLS )
     echo "<pre class='debug'>"; var_dump( $response ); echo"</pre>";
 ?>

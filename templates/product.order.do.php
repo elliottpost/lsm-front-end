@@ -32,15 +32,13 @@ $order->customerID = Auth::getCustomerId();
 $lsm->setParameters( $order );
 $lsm->sendRequest();
 
-Util::getHeader();
-
 $order = $lsm->getResponseContent();
 if( !$order || (int) $lsm->getResponseStatus() != 200 ) {
     Util::getTemplate( '500.php' );
-    Util::getFooter();
     return;
 }
 
+Util::getHeader();
 if( DEBUG_API_CALLS )
     echo "<pre class='debug'>"; var_dump( $order ); echo"</pre>";
 

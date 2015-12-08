@@ -25,14 +25,13 @@ $lsm->setEndpoint( $entry );
 $lsm->useGet();
 $lsm->sendRequest();
 
-Util::getHeader();
-
 $report = $lsm->getResponseContent();
-if( !$report || (int) $lsm->getResponseStatus() != 200 ) {
+if( (int) $lsm->getResponseStatus() != 200 ) {
     Util::getTemplate( '500.php' );
-    Util::getFooter();
     return;
 }
+
+Util::getHeader();
 
 if( DEBUG_API_CALLS )
     echo "<pre class='debug'>"; var_dump( $report ); echo"</pre>";
@@ -40,9 +39,62 @@ if( DEBUG_API_CALLS )
 ?>
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Partner Report</h1>
+        <h1 class="page-header">Partner Sales Report <small>All Orders By Product ID</small></h1>
+    </div>
+</div>
 
-            
+
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Prod ID</th>
+                    <th>Qty</th>
+                    <th>Cost</th>
+                    <th>Price</th>
+                    <th>Total Cost</th>
+                    <th>Total Price</th>
+                    <th>Total Profit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                if( empty( $report ) ) {
+                    ?>
+                    <tr>
+                        <td colspan="7">No records found</td>
+                    </tr>
+                    <?php
+                } else {
+                    foreach( $report as $row ) {
+                        ?>
+                        <tr>
+                            <td><?=$row->productId?></td>
+                            <td><?=$row->quantity?></td>
+                            <td><?=$row->cost?></td>
+                            <td><?=$row->price?></td>
+                            <td><?=$row->totalCost?></td>
+                            <td><?=$row->totalPrice?></td>
+                            <td><?=$row->totalProfit?></td>
+                        </tr>
+                        <?php
+                    }
+                }
+                ?>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Prod ID</th>
+                    <th>Qty</th>
+                    <th>Cost</th>
+                    <th>Price</th>
+                    <th>Total Cost</th>
+                    <th>Total Price</th>
+                    <th>Total Profit</th>
+                </tr>
+            </tfoot>            
+        </table>
     </div>
 </div>
 

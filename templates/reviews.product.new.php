@@ -20,14 +20,14 @@ $lsm->setEndpoint( ApiLinks::decodeHateoasLink( $_REQUEST['entry'] ) );
 $lsm->useGet();
 $lsm->sendRequest();
 
-Util::getHeader();
 
 $product = $lsm->getResponseContent();
 if( !$product || (int) $lsm->getResponseStatus() != 200 ) {
     Util::getTemplate( '500.php' );
-    Util::getFooter();
     return;
 }
+
+Util::getHeader();
 
 if( DEBUG_API_CALLS )
     echo "<pre class='debug'>"; var_dump( $product ); echo"</pre>";

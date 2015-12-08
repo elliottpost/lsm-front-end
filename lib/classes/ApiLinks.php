@@ -73,6 +73,12 @@ abstract class ApiLinks implements I_ApiLinks {
                     $internalLink .= "customer/delete/do/q/{$response->customerID}?entry={$entry}&verified=1";
                     break; 
 
+                case "Get Order History":
+                    $data['method'] = 'get-order-history';
+                    $class = 'btn-primary';
+                    $resourceId = $response->customerID;
+                    $internalLink .= "customer/orders/q/{$response->customerID}?entry={$entry}";
+                    break;
 
 
 

@@ -28,9 +28,7 @@ $lsm->sendRequest();
 
 $order = $lsm->getResponseContent();
 if( !$order || (int) $lsm->getResponseStatus() != 200 ) {
-    Util::getHeader();
     Util::getTemplate( '500.php' );
-    Util::getFooter();
     return;
 }
 
@@ -44,9 +42,7 @@ $productLsm->sendRequest();
 $product = $productLsm->getResponseContent();
 
 if( !$product || (int) $productLsm->getResponseStatus() != 200 ) {
-    Util::getHeader();
     Util::getTemplate( '500.php' );
-    Util::getFooter();
     return;
 }
 

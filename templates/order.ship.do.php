@@ -20,29 +20,44 @@ if( !isset( $_REQUEST['verified'] ) || (int) $_REQUEST['verified'] != 1 ) {
     return;
 }
 
+//first get an order representation
+$orderRepEntry = LSM_API_ENDPOINT . "order/" . $_REQUEST['q'] ;
+$orderRepLsm = new LsmCurl;
+$orderRepLsm->setEndpoint( $orderRepEntry );
+$orderRepLsm->useGet();
+$orderRepLsm->sendRequest();
+
+$order = $orderRepLsm->getResponseContent();
+if( !$order || (int) $orderRepLsm->getResponseStatus() != 200 ) {
+    Util::getTemplate( '500.php' );
+    return;
+}
+//update the tracking number
+$order->trackingNumber = "1z555555555";
+
+
 //parse entry
 if( isset( $_REQUEST['entry'] ) )
     $entry = ApiLinks::decodeHateoasLink( $_REQUEST['entry'] );
 else
-    $entry = LSM_API_ENDPOINT . "order/ship/" . $_REQUEST['q'] ;
+    $entry = LSM_API_ENDPOINT . "order/ship";
 
 //ensure we have a request to create
 $lsm = new LsmCurl;
 $lsm->setEndpoint( $entry );
 $lsm->usePost();
 //send the request
-$lsm->addParameter( 'trackingNumber', '1Z555555555555555555' );
+$lsm->setParameters( $order );
 $lsm->sendRequest();
-
-Util::getHeader();
 
 $response = $lsm->getResponseContent();
 $status = (int) $lsm->getResponseStatus();
 if( !$response || $status < 200 || $status > 204 || @!$response->isSuccess ) {
     Util::getTemplate( '500.php' );
-    Util::getFooter();
     return;
 }
+
+Util::getHeader();
 
 if( DEBUG_API_CALLS )
     echo "<pre class='debug'>"; var_dump( $response ); echo"</pre>";

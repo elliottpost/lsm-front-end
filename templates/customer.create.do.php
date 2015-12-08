@@ -71,17 +71,15 @@ $lsm->setParameters( $customer );
 //send the request
 $lsm->sendRequest();
 
-Util::getHeader();
 
 $response = $lsm->getResponseContent();
 $status = (int) $lsm->getResponseStatus();
 if( !$response || $status < 200 || $status > 204 || @!$response->isSuccess ) {
-
     Util::getTemplate( '500.php' );
-    Util::getFooter();
     return;
 }
 
+Util::getHeader();
 if( DEBUG_API_CALLS )
     echo "<pre class='debug'>"; var_dump( $response ); echo"</pre>";
 ?>

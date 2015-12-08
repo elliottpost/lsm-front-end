@@ -105,7 +105,7 @@ class LsmCurl implements I_LsmCurl {
 		//determine our method and send the request
 		switch( $this->_method ):
 			case "post":
-				$this->_ch->post( $this->_url, $this->_parameters );
+				$this->_ch->post( $this->_url, $this->_ch->buildPostData( $this->_parameters ) );
 				break;
 
 			case "put":

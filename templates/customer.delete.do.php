@@ -33,9 +33,7 @@ $lsm->sendRequest();
 
 $response = $lsm->getResponseContent();
 if( !$response || (int) $lsm->getResponseStatus() != 200 || @!$response->isSuccess ) {
-    Util::getHeader();
     Util::getTemplate( '500.php' );
-    Util::getFooter();
     return;
 }
 

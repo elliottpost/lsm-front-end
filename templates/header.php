@@ -59,6 +59,9 @@
                             <a href="<?=SITE_URI?>customer/detail/q/<?=Auth::getCustomerId();?>">My Account</a>
                         </li> 
                         <li>
+                            <a href="<?=SITE_URI?>partner/report/q/1">LSM Partner Report</a>
+                        </li>                         
+                        <li>
                             <a href="<?=SITE_URI?>logout">Logout</a>
                         </li>
                         <?php

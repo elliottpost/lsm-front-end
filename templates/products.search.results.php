@@ -19,10 +19,17 @@ $lsm->setEndpoint( LSM_API_ENDPOINT . "products/" . $_REQUEST['q'] );
 $lsm->useGet();
 $lsm->sendRequest();
 
+$products = $lsm->getResponseContent();
+$status = (int) $lsm->getResponseStatus();
+
+if( $status < 200 || $status > 204 ) {
+    Util::getTemplate( '500.php' );
+    return;
+} 
+
 Util::getHeader();
 
-?>
-    <!-- Page Heading -->
+?>    <!-- Page Heading -->
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Products
@@ -32,16 +39,7 @@ Util::getHeader();
     </div>
     <!-- /.row -->
     
-    <?php
-    $products = $lsm->getResponseContent();
-    $status = (int) $lsm->getResponseStatus();
-
-    if( $status < 200 || $status > 204 ) {
-        Util::getTemplate( '500.php' );
-        Util::getFooter();
-        return;
-    } 
-    
+    <?php    
     if( empty( $products ) ) {
         ?>
         <div class="row">
