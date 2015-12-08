@@ -32,20 +32,6 @@ abstract class ApiLinks implements I_ApiLinks {
                     $internalLink .= "product/availability/q/{$response->productID}?entry={$entry}";
                     break;
 
-                case "Create Product Review":
-                    $data['method'] = 'create-product-review';
-                    $class = 'btn-primary';
-                    $resourceId = $response->productID;
-                    $internalLink .= "reviews/product/new/q/{$response->productID}?entry={$entry}";
-                    break;
-
-                case "Get Product Reviews":
-                    $data['method'] = 'get-product-reviews';
-                    $class = 'btn-primary';
-                    $resourceId = $response->productID;
-                    $internalLink .= "reviews/product/q/{$response->productID}?entry={$entry}";
-                    break; 
-
                 case "Buy Product":
                     $data['method'] = 'buy-product';
                     $class = 'btn-primary';
@@ -58,6 +44,26 @@ abstract class ApiLinks implements I_ApiLinks {
                     $class = 'btn-primary';
                     $resourceId = $response->productID;
                     $internalLink .= "product/detail/q/{$response->productID}?entry={$entry}";
+                    break; 
+
+
+
+                #----------
+                # Reviews
+                #----------
+
+                case "Create Product Review":
+                    $data['method'] = 'create-product-review';
+                    $class = 'btn-primary';
+                    $resourceId = $response->productID;
+                    $internalLink .= "reviews/product/create/q/{$response->productID}?entry={$entry}";
+                    break;
+
+                case "Get Product Reviews":
+                    $data['method'] = 'get-product-reviews';
+                    $class = 'btn-primary';
+                    $resourceId = $response->productID;
+                    $internalLink .= "reviews/product/q/{$response->productID}?entry={$entry}";
                     break; 
 
 

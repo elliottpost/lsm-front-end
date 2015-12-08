@@ -34,4 +34,10 @@ if( !isset( $_GET['p3'] ) ) {
 }
 
 $p3 = strtolower( $_GET['p3'] );
-Util::getTemplate(  $p1 . "." . $p2 . "." . $p3 . ".php" );
+if( !isset( $_GET['p4'] ) ) {
+    Util::getTemplate(  $p1 . "." . $p2 . "." . $p3 . ".php" );
+    return;
+}
+
+$p4 = strtolower( $_GET['p4'] );
+Util::getTemplate(  $p1 . "." . $p2 . "." . $p3 . "." . $p4 . ".php" );
