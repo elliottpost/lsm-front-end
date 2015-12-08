@@ -29,7 +29,8 @@ if( $status < 200 || $status > 204 ) {
 
 Util::getHeader();
 
-?>    <!-- Page Heading -->
+?>    
+    <!-- Page Heading -->
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Products
@@ -51,10 +52,11 @@ Util::getHeader();
     }
     
     foreach( $products as $product ) {
-        if( DEBUG_API_CALLS )
+        if( DEBUG_API_CALLS ) {
             echo "<pre class='debug'>"; var_dump( $product ); echo"</pre>";
+        }
         ?>
-        <div class="row">
+        <div class="row" style="margin-bottom: 2em;">
             <div class="col-md-7">
                 <a href="<?=$product->link[0]->url?>">
                     <img class="img-responsive" src="http://placehold.it/700x300" alt="">
@@ -68,6 +70,7 @@ Util::getHeader();
                 echo ApiLinks::linksToHtml( $product );
                 ?>
             </div>
+            <div class="clearfix"></div>
         </div>
 
         <?php

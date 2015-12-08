@@ -52,8 +52,9 @@ if( $status < 200 || $status > 204 || @!$response->isSuccess ) {
 }
 
 Auth::setCustomerId( $response->genericReturnValue );
-// if( DEBUG_API_CALLS )
+// if( DEBUG_API_CALLS ) {
 //     echo "<pre class='debug'>"; var_dump( $response ); echo"</pre>";
+// }
 
 //authenticated successfully
 header( "Location: " . SITE_URI );

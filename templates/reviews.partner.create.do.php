@@ -50,8 +50,9 @@ if( !$review || (int) $lsm->getResponseStatus() != 200 ) {
 }
 
 Util::getHeader();
-if( DEBUG_API_CALLS )
+if( DEBUG_API_CALLS ) {
     echo "<pre class='debug'>"; var_dump( $review ); echo"</pre>";
+}
 
 ?>
 

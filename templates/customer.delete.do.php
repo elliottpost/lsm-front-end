@@ -45,8 +45,9 @@ if( $_REQUEST['q'] == Auth::getCustomerId() ) {
 
 Util::getHeader();
 
-if( DEBUG_API_CALLS )
+if( DEBUG_API_CALLS ) {
     echo "<pre class='debug'>"; var_dump( $response ); echo"</pre>";
+}
 ?>
 <div class="row">
     <div class="col-lg-12">
