@@ -19,9 +19,9 @@
 
     <!-- jQuery -->
     <script src="<?=JS_PATH?>jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
     <script src="<?=JS_PATH?>bootstrap.min.js"></script>
+    <script src="<?=JS_PATH?>lsm.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script> 
 
 </body>
 
