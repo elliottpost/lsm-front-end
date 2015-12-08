@@ -1,7 +1,6 @@
 <?php
 /**
  * processes a request to delete an order
- * @todo test
  */
 
 if( !Auth::isAuthenticated() ) {
@@ -15,7 +14,7 @@ if( !isset( $_REQUEST['q'] ) || empty( $_REQUEST['q'] ) ) {
     return;
 }
 
-//ensure the user has verfied they want to delete the customer
+//ensure the user has verfied they want to delete the order
 if( !isset( $_REQUEST['verified'] ) || (int) $_REQUEST['verified'] != 1 ) {
     Util::getTemplate( 'order.detail.php' ); 
     return;
@@ -54,6 +53,7 @@ if( DEBUG_API_CALLS )
 <div class="row">
     <div class="col-lg-12">
         <?php 
+        $response->orderID = $_REQUEST['q'];
         echo ApiLinks::linksToHtml( $response );
         ?>
     </div>

@@ -108,17 +108,17 @@ class LsmCurl implements I_LsmCurl {
 				$this->_ch->post( $this->_url, $this->_parameters );
 				break;
 
-			default:
-			case "get":
-				$this->_ch->get( $this->_url, $this->_parameters );
-				break;
-
 			case "put":
 				$this->_ch->put( $this->_url, $this->_parameters );
 				break;
 
 			case "delete":
 				$this->_ch->delete( $this->_url, $this->_parameters );
+				break;
+
+			default:
+			case "get":
+				$this->_ch->get( $this->_url, $this->_parameters );
 				break;
 
 		endswitch;

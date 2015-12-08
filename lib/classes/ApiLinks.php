@@ -20,6 +20,11 @@ abstract class ApiLinks implements I_ApiLinks {
             $resourceId = null;
             $data['method'] = null;
             switch( $link->action ):
+
+                #----------
+                # Products
+                #----------
+
                 case "Check Product Availability":
                     $data['method'] = 'check-product-availability';
                     $class = 'confirm-delete btn-primary';
@@ -55,6 +60,12 @@ abstract class ApiLinks implements I_ApiLinks {
                     $internalLink .= "product/detail/q/{$response->productID}?entry={$entry}";
                     break; 
 
+
+
+                #----------
+                # Customers
+                #----------
+
                 case "Delete Customer":
                     $data['method'] = 'delete-customer';
                     $class = 'confirm-delete btn-danger';
@@ -62,19 +73,18 @@ abstract class ApiLinks implements I_ApiLinks {
                     $internalLink .= "customer/delete/do/q/{$response->customerID}?entry={$entry}&verified=1";
                     break; 
 
+
+
+
+                #----------
+                # Partners
+                #----------
                 case "Delete Partner":
                     $data['method'] = 'delete-partner';
                     $class = 'confirm-delete btn-danger';
                     $resourceId = $response->partnerID;
                     $internalLink .= "partner/delete/do/q/{$response->partnerID}?entry={$entry}&verified=1";
                     break; 
-
-                case "Check Product Availability":
-                    $data['method'] = 'check-product-availability';
-                    $class = 'btn-primary';
-                    $resourceId = $response->productID;
-                    $internalLink .= "product/availability/q/{$response->productID}?entry={$entry}";
-                    break;
 
                 case "Generate Report":
                     $data['method'] = 'generate-partner-report';
@@ -83,8 +93,11 @@ abstract class ApiLinks implements I_ApiLinks {
                     $internalLink .= "partner/report/q/{$response->partnerID}?entry={$entry}";
                     break;
 
-                case "Get Order Detail":
-                    //@todo
+
+                #----------
+                # Orders
+                #----------
+                case "Get Order Details":
                     $data['method'] = 'get-order-details';
                     $class = 'btn-primary';
                     $resourceId = $response->orderID;
@@ -92,11 +105,10 @@ abstract class ApiLinks implements I_ApiLinks {
                     break;
 
                 case "Cancel Order":
-                    //@todo
                     $data['method'] = 'cancel-order';
                     $class = "confirm-delete btn-danger";
                     $resourceId = $response->orderID;
-                    $internalLink .= "order/cancel/do/q/{$response->orderID}?entry={$entry}";
+                    $internalLink .= "order/cancel/do/q/{$response->orderID}?entry={$entry}&verified=1";
                     break; 
 
                 case "Ship Order":
@@ -104,7 +116,15 @@ abstract class ApiLinks implements I_ApiLinks {
                     $data['method'] = 'ship-order';
                     $class = 'btn-primary';
                     $resourceId = $response->orderID;
-                    $internalLink .= "order/ship/q/{$response->orderID}?entry={$entry}";
+                    $internalLink .= "order/ship/do/q/{$response->orderID}?entry={$entry}&verified=1";
+                    break; 
+
+                case "Fulfill Order":
+                    //@todo
+                    $data['method'] = 'fulfill-order';
+                    $class = 'btn-primary';
+                    $resourceId = $response->orderID;
+                    $internalLink .= "order/fulfill/do/q/{$response->orderID}?entry={$entry}&verified=1";
                     break; 
 
                 default:

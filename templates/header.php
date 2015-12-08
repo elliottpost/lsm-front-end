@@ -54,7 +54,10 @@
                         ?>
                         <li>
                             <a href="<?=SITE_URI?>product/create">New Product</a>
-                        </li>                       
+                        </li> 
+                        <li>
+                            <a href="<?=SITE_URI?>customer/detail/q/<?=Auth::getCustomerId();?>">My Account</a>
+                        </li> 
                         <li>
                             <a href="<?=SITE_URI?>logout">Logout</a>
                         </li>
